@@ -1,0 +1,89 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box {
+    background-color: #fff; /* Branco */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #2f2e41; /* Lilás escuro */
+    color: #ccc; /* Cinza claro */
+}
+
+.container {
+    background-color: #fff; /* Branco */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.content {
+    text-align: left; /* Alinhado à esquerda */
+}
+
+.mac-input {
+    margin-bottom: 20px;
+}
+
+.mac-input h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.mac-input .btn {
+    margin-top: 10px;
+}
+
+.mac-list {
+    margin-bottom: 20px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+    text-align: left;
+    background-color: #f9f9f9; /* Cinza claro */
+    color: #333;
+    border-radius: 5px;
+}
+
+.input-field {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    font-size: 16px;
+}
+
+.btn {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #8257E6; /* Lilás */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #6B49D3; /* Lilás mais escuro */
+}
