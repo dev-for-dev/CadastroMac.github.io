@@ -1,58 +1,57 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const scanButton = document.getElementById('scanButton');
-    const manualInput = document.getElementById('manualInput');
-    const addManualButton = document.getElementById('addManualButton');
     const macList = document.getElementById('macList');
     const copyButton = document.getElementById('copyButton');
     let scannedMACs = [];
-    const loginForm = document.getElementById('loginForm');
-    const mainContainer = document.querySelector('.container');
-    const loginContainer = document.querySelector('.login-container');
+    let isScanning = false;
 
-    loginForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        // Adicione lógica para verificar o nome de usuário e senha aqui (por exemplo, comparando com credenciais hardcoded)
-        if (username === 'admin' && password === 'admin') {
-            // Exibir a tela principal se o login for bem-sucedido
-            loginContainer.classList.add('hidden');
-            mainContainer.classList.remove('hidden');
-        } else {
-            alert('Credenciais inválidas. Tente novamente.');
-        }
-    });
+    scanButton.addEventListener('click', function () {
+        if (isScanning) return;
+        isScanning = true;
 
-    scanButton.addEventListener('click', function() {
-        const video = document.createElement('video');
-        document.body.appendChild(video);
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#scanButton')
+            },
+            decoder: {
+                readers: ['code_128_reader']
+            }
+        }, function (err) {
+            if (err) {
+                console.error('Erro ao iniciar Quagga:', err);
+                isScanning = false;
+                return;
+            }
+            Quagga.start();
+        });
 
-        const constraints = { video: { facingMode: 'environment' } };
+        Quagga.onDetected(function (result) {
+            const mac = result.codeResult.code.slice(0);
+            const existingIndex = scannedMACs.findIndex(item => item === mac);
 
-        navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-            video.srcObject = stream;
-            video.setAttribute('playsinline', true);
-            video.play();
+            if (existingIndex !== -1) {
+                scannedMACs[existingIndex] = mac;
+            } else {
+                scannedMACs.push(mac);
+            }
 
-            const codeReader = new ZXing.BrowserQRCodeReader();
-            codeReader.decodeFromVideoDevice(undefined, video, (result, err) => {
-                if (result) {
-                    const mac = result.text.slice(1).toUpperCase(); // Convertido para caixa alta
-                    scannedMACs.push(mac);
-                    updateMACList();
-                    video.srcObject.getTracks().forEach(track => track.stop());
-                    document.body.removeChild(video);
-                } else {
-                    console.error(err);
-                }
-            });
+            updateMACList();
+            Quagga.stop();
+            isScanning = false;
         });
     });
 
     addManualButton.addEventListener('click', function() {
         const mac = manualInput.value.trim().toUpperCase();
         if (isValidMAC(mac)) {
-            scannedMACs.push(mac);
+            const existingIndex = scannedMACs.findIndex(item => item === mac);
+            if (existingIndex !== -1) {
+                scannedMACs[existingIndex] = mac;
+            } else {
+                scannedMACs.push(mac);
+            }
             updateMACList();
             manualInput.value = '';
         } else {
@@ -65,10 +64,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return mac.length === 12 && hexRegex.test(mac);
     }
 
-    copyButton.addEventListener('click', function() {
-        navigator.clipboard.writeText(scannedMACs.join('\n')).then(function() {
+    copyButton.addEventListener('click', function () {
+        const formattedMACs = scannedMACs.map(formatMAC);
+        navigator.clipboard.writeText(formattedMACs.join('\n')).then(function () {
             alert('MACs copiados para a área de transferência!');
-        }, function(err) {
+        }, function (err) {
             console.error('Erro ao copiar MACs:', err);
         });
     });

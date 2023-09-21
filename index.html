@@ -9,45 +9,16 @@
 </head>
 
 <body>
-    <div class="login-container">
-        <div class="login-box">
-            <h1>Login</h1>
-            <form id="loginForm">
-                <div class="mac-input">
-                    <label for="username">Usuário:</label>
-                </div>
-                <div class="mac-input">
-                    <input type="text" id="username" required>
-                </div>
-                <div class="mac-input">
-                    <label for="password">Senha:</label>
-                </div>
-                <div class="mac-input">
-                    <input type="password" id="password" required>
-                </div>
+    <h1>Cadastro de MAC</h1>
+    <button class="btn" id="scanButton">Escanear Código de Barras</button>
+    <h2>Digitar MAC Manualmente</h2>
+    <div><label for="manualInput">Digite o MAC:</label></div>
+    <input type="text" id="manualInput" class="input-field">
+    <button class="btn" id="addManualButton">Adicionar Manualmente</button>
 
-                <button type="submit" class="btn">Entrar</button>
-            </form>
-        </div>
-    </div>
+    <div class="input-field" id="macList"></div>
+    <button class="btn" id="copyButton">Copiar MACs</button>
 
-    <div class="container hidden">
-        <div class="mac-input">
-            <h1>Cadastro de MAC</h1>
-            <button class="btn" id="scanButton">Escanear Código de Barras</button>
-            <h2>Digitar MAC Manualmente</h2>
-            <div>
-                <label for="manualInput">Digite o MAC:</label>
-            </div>
-            
-            <input type="text" id="manualInput" class="input-field">
-            <button class="btn" id="addManualButton">Adicionar Manualmente</button>
-        </div>
-        <div class="mac-list" id="macList"></div>
-        <button class="btn" id="copyButton">Copiar MACs</button>
-    </div>
-    
-    <script src="https://rawgit.com/zxing-js/library/master/zxing.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <script src="script.js"></script>
 </body>

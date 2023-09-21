@@ -1,89 +1,52 @@
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.login-box {
-    background-color: #fff; /* Branco */
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 300px;
-    width: 100%;
-}
-
-.hidden {
-    display: none;
-}
-
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #2f2e41; /* Lilás escuro */
-    color: #ccc; /* Cinza claro */
-}
-
-.container {
-    background-color: #fff; /* Branco */
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px;
-}
-
-.content {
-    text-align: left; /* Alinhado à esquerda */
-}
-
-.mac-input {
-    margin-bottom: 20px;
-}
-
-.mac-input h2 {
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.mac-input .btn {
-    margin-top: 10px;
-}
-
-.mac-list {
-    margin-bottom: 20px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    min-height: 100px;
+    background-color: #808080; /* Cinza médio */
+    color: #4B0082; /* Roxo escuro */
     text-align: left;
-    background-color: #f9f9f9; /* Cinza claro */
-    color: #333;
-    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: #4B0082; /* Roxo escuro */
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.button-container button {
+    display: block;
+    margin-bottom: 10px;
 }
 
 .input-field {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-label {
-    font-size: 16px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .btn {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #8257E6; /* Lilás */
+    background-color: #4B0082; /* Roxo escuro */
     color: #fff;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .btn:hover {
-    background-color: #6B49D3; /* Lilás mais escuro */
+    background-color: #800080; /* Roxo mais claro */
+}
+
+#macList {
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #4B0082; /* Roxo escuro */
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
 }
