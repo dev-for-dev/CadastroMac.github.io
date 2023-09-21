@@ -24,28 +24,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     scanButton.addEventListener('click', function() {
-        Quagga.init({
-            inputStream : {
-                name : "Live",
-                type : "LiveStream",
-                target: document.querySelector('#scanButton') 
-            },
-            decoder : {
-                readers : ['ean_reader']
-            }
-        }, function(err) {
-            if (err) {
-                console.error('Erro ao iniciar Quagga:', err);
-                return;
-            }
-            Quagga.start();
-        });
+        const video = document.createElement('video');
+        document.body.appendChild(video);
 
-        Quagga.onDetected(function(result) {
-            const mac = result.codeResult.code.slice(1).toUpperCase();
-            scannedMACs.push(mac);
-            updateMACList();
-            Quagga.stop();
+        const constraints = { video: { facingMode: 'environment' } };
+
+        navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+            video.srcObject = stream;
+            video.setAttribute('playsinline', true);
+            video.play();
+
+            const codeReader = new ZXing.BrowserQRCodeReader();
+            codeReader.decodeFromVideoDevice(undefined, video, (result, err) => {
+                if (result) {
+                    const mac = result.text.slice(1).toUpperCase(); // Convertido para caixa alta
+                    scannedMACs.push(mac);
+                    updateMACList();
+                    video.srcObject.getTracks().forEach(track => track.stop());
+                    document.body.removeChild(video);
+                } else {
+                    console.error(err);
+                }
+            });
         });
     });
 
