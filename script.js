@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             updateMACList();
             Quagga.stop();
             isScanning = false;
-            scanButton.style.display = 'inline-block';
+            videoContainer.style.display = 'block';
         });
     });
 
