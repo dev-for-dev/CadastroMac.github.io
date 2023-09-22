@@ -17,11 +17,11 @@ h1, h2 {
     opacity: 0.6; /* Define a transparência para 30% */
 }
 .button-container {
-    margin-top: 20px;
+    text-align: center;
 }
 
 .button-container button {
-    display: block;
+    display: inline-block;
     margin-bottom: 10px;
 }
 
@@ -43,6 +43,12 @@ h1, h2 {
 
 .btn:hover {
     background-color: #800080; /* Roxo mais claro */
+}
+.video-container {
+    max-width: 100%; /* Ajusta a largura máxima */
+    max-height: 150px; /* Ajusta a altura máxima */
+    margin: 0 auto; /* Centraliza o vídeo na div */
+    overflow: hidden; /* Esconde qualquer parte do vídeo que exceder os limites */
 }
 
 #macList {

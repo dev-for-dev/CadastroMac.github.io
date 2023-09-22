@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             inputStream: {
                 name: "Live",
                 type: "LiveStream",
-                target: document.querySelector('#scanButton')
+                target: videoContainer
             },
             decoder: {
                 readers: ['code_128_reader']
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         Quagga.onDetected(function (result) {
-            const mac = result.codeResult.code.slice(0);
+            const mac = result.codeResult.code.slice(0).toUpperCase();
             const existingIndex = scannedMACs.findIndex(item => item === mac);
 
             if (existingIndex !== -1) {
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             updateMACList();
             Quagga.stop();
             isScanning = false;
+            scanButton.style.display = 'inline-block';
         });
     });
 
